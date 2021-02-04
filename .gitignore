@@ -1,0 +1,4 @@
+data/*
+!data/mods
+!data/config
+!data/server.properties

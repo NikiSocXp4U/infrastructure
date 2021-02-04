@@ -8,10 +8,12 @@ services:
       EULA: "TRUE"
       TYPE: FABRIC
 
+    volumes:
+      - ./data:/data
     image: itzg/minecraft-server
 
     container_name: mc
 
     tty: true
     stdin_open: true
-    restart: always
+    restart: unless-stopped
