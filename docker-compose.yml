@@ -70,3 +70,10 @@ services:
     restart: unless-stopped
     expose:
       - 9100
+
+  fluent-bit:
+    image: fluent/fluent-bit
+    hostname: fluent-bit
+    container_name: fluent-bit
+    volumes:
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf

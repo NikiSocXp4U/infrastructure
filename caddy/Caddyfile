@@ -16,6 +16,13 @@
         }
     }
 
+    route /fluent-bit {
+        basicauth {
+            prometheus {$PROMETHEUS_HASHED_PASSWORD}
+        }
+        reverse_proxy http://fluent-bit
+    }
+
     # gzip our data for good luck
     encode zstd gzip
 }
