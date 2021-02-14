@@ -1,4 +1,4 @@
-http://localhost {
+{$SITE_ADDRESS} {
     # Reverse proxy to the dynmap
     reverse_proxy http://mc:8123
 
