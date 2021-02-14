@@ -4,6 +4,7 @@ services:
     image: caddy:alpine
     container_name: caddy
     restart: always
+    env_file: .env
 
     volumes:
       - ./caddy/:/etc/caddy/
