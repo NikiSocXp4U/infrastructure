@@ -2,7 +2,9 @@ version: "3.7"
 services:
   minecraft-server:
     ports:
+      - "27015:27015"
       - "25565:25565"
+      - "8123:8123"
 
     environment:
       EULA: "TRUE"
