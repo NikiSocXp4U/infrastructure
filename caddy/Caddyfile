@@ -6,9 +6,13 @@
         basicauth {
             prometheus {$PROMETHEUS_HASHED_PASSWORD}
         }
-        route /prometheus/minecraft {
+        route /prometheus/minecraft/metrics {
             rewrite * /metrics
             reverse_proxy http://mc-exporter:8000
+        }
+        route /prometheus/node/metrics {
+            rewrite * /metrics
+            reverse_proxy http://node-exporter:9100
         }
     }
 
