@@ -1,12 +1,6 @@
 http://localhost {
-    # Redirect root to map. Temporary because I might add an admin panel later
-    redir / /map temporary  
-
     # Reverse proxy to the dynmap
-    route /map {
-        uri strip_prefix /map
-        reverse_proxy http://mc:8123
-    }
+    reverse_proxy http://mc:8123
 
     # gzip our data for good luck
     encode zstd gzip
