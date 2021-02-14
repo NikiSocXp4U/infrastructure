@@ -1,10 +1,30 @@
 version: "3.7"
 services:
-  minecraft-server:
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: always
+
+    volumes:
+      - ./caddy/:/etc/caddy/
     ports:
-      - "25575:25575"
-      - "25565:25565"
-      - "8123:8123"
+      - "80:80"
+      - "443:443"
+
+  minecraft-server:
+    image: itzg/minecraft-server
+    hostname: mc
+    container_name: mc
+
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+    volumes:
+      - ./data:/data
+    ports:
+      - 25575:25575
+      - 25565:25565
 
     environment:
       EULA: "TRUE"
@@ -12,13 +32,3 @@ services:
       MOTD: Some Server Dot Jay Peg
 
     env_file: .env
-
-    volumes:
-      - ./data:/data
-    image: itzg/minecraft-server
-
-    container_name: mc
-
-    tty: true
-    stdin_open: true
-    restart: unless-stopped
