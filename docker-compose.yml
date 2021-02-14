@@ -33,3 +33,23 @@ services:
       MOTD: Some Server Dot Jay Peg
 
     env_file: .env
+
+  minecraft-exporter:
+    image: joshi425/minecraft_exporter
+    hostname: mc-exporter
+    container_name: mc-exporter
+
+    command: >
+      sh -c "sleep 10; python minecraft_exporter.py"
+
+    environment:
+      RCON_HOST: mc
+      RCON_PORT: 25575
+      DYNMAP_ENABLED: "True"
+    volumes:
+      - ./data/world:/world
+    env_file: .env
+
+    depends_on:
+      - minecraft-server
+    restart: unless-stopped

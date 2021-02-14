@@ -1,6 +1,11 @@
 {$SITE_ADDRESS} {
     # Reverse proxy to the dynmap
-    reverse_proxy http://mc:8123
+    reverse_proxy / http://mc:8123
+
+    route /prometheus/minecraft {
+        rewrite * /metrics
+        reverse_proxy http://mc-exporter:8000
+    }
 
     # gzip our data for good luck
     encode zstd gzip
