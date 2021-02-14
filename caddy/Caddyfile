@@ -2,9 +2,14 @@
     # Reverse proxy to the dynmap
     reverse_proxy / http://mc:8123
 
-    route /prometheus/minecraft {
-        rewrite * /metrics
-        reverse_proxy http://mc-exporter:8000
+    route /prometheus/* {
+        basicauth {
+            prometheus {$PROMETHEUS_HASHED_PASSWORD}
+        }
+        route /prometheus/minecraft {
+            rewrite * /metrics
+            reverse_proxy http://mc-exporter:8000
+        }
     }
 
     # gzip our data for good luck
