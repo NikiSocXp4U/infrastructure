@@ -1,4 +1,6 @@
+# Exclude data directory, but track mods and configs
 data/*
 !data/mods
 !data/config
-!data/server.properties
+
+.env
