@@ -1,27 +1,36 @@
 {$SITE_ADDRESS} {
-    # Reverse proxy to the dynmap
-    reverse_proxy / http://mc:8123
-
-    route /prometheus/* {
+    # Metrics endpoints
+    route /metrics/* {
         basicauth {
             prometheus {$PROMETHEUS_HASHED_PASSWORD}
         }
-        route /prometheus/minecraft/metrics {
+        route /metrics/caddy {
+            metrics
+        }
+        route /metrics/minecraft {
             rewrite * /metrics
             reverse_proxy http://mc-exporter:8000
         }
-        route /prometheus/node/metrics {
+        route /metrics/node {
+            rewrite * /metrics
+            reverse_proxy http://node-exporter:9100
+        }
+        route /metrics/fluent-bit {
             rewrite * /metrics
             reverse_proxy http://node-exporter:9100
         }
     }
 
-    route /fluent-bit {
+    route /fluent-bit/* {
         basicauth {
             prometheus {$PROMETHEUS_HASHED_PASSWORD}
         }
+        uri strip_prefix /fluent-bit
         reverse_proxy http://fluent-bit
     }
+
+    # Send everything else to the dynmap
+    reverse_proxy * http://mc:8123
 
     # gzip our data for good luck
     encode zstd gzip

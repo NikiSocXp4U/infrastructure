@@ -75,5 +75,6 @@ services:
     image: fluent/fluent-bit
     hostname: fluent-bit
     container_name: fluent-bit
+    command: "" # disabled
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
