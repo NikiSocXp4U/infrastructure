@@ -16,8 +16,8 @@
             reverse_proxy http://node-exporter:9100
         }
         route /metrics/fluent-bit {
-            rewrite * /metrics
-            reverse_proxy http://node-exporter:9100
+            rewrite * /api/v1/metrics/prometheus
+            reverse_proxy http://fluent-bit:9100
         }
     }
 
