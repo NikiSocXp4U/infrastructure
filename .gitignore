@@ -1,8 +1,10 @@
 # Exclude data directory, but track mods and configs
-/data/**
-!/data/mods/*
-!/data/config/*
-!/data/dynmap/
-!/data/dynmap/configuration.txt
+data/*
+!data/mods/*
+!data/config/*
+
+!data/dynmap/
+data/dynmap/*
+!data/dynmap/configuration.txt
 
 .env

@@ -40,9 +40,9 @@ components:
   - class: org.dynmap.ClientConfigurationComponent
   
   - class: org.dynmap.InternalClientUpdateComponent
-    sendhealth: true
+    sendhealth: false
     sendposition: true
-    allowwebchat: true
+    allowwebchat: false
     webchat-interval: 5
     hidewebchatip: false
     trustclientname: false
@@ -56,7 +56,7 @@ components:
     # (optional) block player login IDs that are banned from chatting
     block-banned-player-chat: true
     # Require login for web-to-server chat (requires login-enabled: true)
-    webchat-requires-login: false
+    webchat-requires-login: true
     # If set to true, users must have dynmap.webchat permission in order to chat
     webchat-permissions: false
     # Limit length of single chat messages
@@ -333,7 +333,7 @@ disable-webserver: false
 allow-symlinks: true
 
 # Enable login support
-login-enabled: false
+login-enabled: true
 # Require login to access website (requires login-enabled: true)
 login-required: false
 
