@@ -7,17 +7,17 @@
         route /metrics/caddy {
             metrics
         }
-        route /metrics/minecraft {
-            rewrite * /metrics
-            reverse_proxy http://mc-exporter:8000
-        }
         route /metrics/node {
             rewrite * /metrics
-            reverse_proxy http://172.17.0.1:9100  # host ip
+            reverse_proxy http://localhost:9100
         }
         route /metrics/fluent-bit {
             rewrite * /api/v1/metrics/prometheus
-            reverse_proxy http://fluent-bit:9100
+            reverse_proxy http://localhost:8000
+        }
+        route /metrics/minecraft {
+            rewrite * /metrics
+            reverse_proxy http://localhost:9101
         }
     }
 
@@ -26,7 +26,7 @@
             prometheus {$PROMETHEUS_HASHED_PASSWORD}
         }
         uri strip_prefix /fluent-bit
-        reverse_proxy http://fluent-bit
+        reverse_proxy http://localhost:8000
     }
 
     # Send everything else to the dynmap

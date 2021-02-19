@@ -5,6 +5,7 @@ services:
     container_name: caddy
     restart: always
     env_file: .env
+    network_mode: host
     volumes:
       - ./caddy/:/etc/caddy/
     ports:
@@ -25,6 +26,7 @@ services:
     ports:
       - 25575:25575
       - 25565:25565
+      - 8123:8123
 
     environment:
       EULA: "TRUE"
@@ -53,6 +55,8 @@ services:
     depends_on:
       - minecraft-server
     restart: unless-stopped
+    ports:
+      - 9101:8000
 
   node-exporter:
     image: prom/node-exporter:v1.1.0
@@ -65,6 +69,8 @@ services:
     command:
       - "--path.rootfs=/rootfs"
     restart: unless-stopped
+    ports:
+      - 9100:9100
 
   fluent-bit:
     image: fluent/fluent-bit
@@ -73,3 +79,5 @@ services:
     command: "" # disabled
     volumes:
       - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+    ports:
+      - 8000:80
