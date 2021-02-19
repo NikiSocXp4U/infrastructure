@@ -30,7 +30,7 @@
     }
 
     # Send everything else to the dynmap
-    reverse_proxy * http://mc:8123
+    reverse_proxy * http://localhost:8123
 
     # gzip our data for good luck
     encode zstd gzip
