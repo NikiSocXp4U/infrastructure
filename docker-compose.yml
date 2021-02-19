@@ -5,6 +5,7 @@ services:
     container_name: caddy
     restart: always
     env_file: .env
+    network_mode: host
 
     volumes:
       - ./caddy/:/etc/caddy/
@@ -31,6 +32,7 @@ services:
       EULA: "TRUE"
       TYPE: FABRIC
       MOTD: Some Server Dot Jay Peg
+      MEMORY: 6G
 
     env_file: .env
 
@@ -59,17 +61,11 @@ services:
     hostname: node-exporter
     container_name: node-exporter
     volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
+      - /:/rootfs:ro,rslave
+    network_mode: host
     command:
-      - "--path.procfs=/host/proc"
       - "--path.rootfs=/rootfs"
-      - "--path.sysfs=/host/sys"
-      - "--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)"
     restart: unless-stopped
-    expose:
-      - 9100
 
   fluent-bit:
     image: fluent/fluent-bit

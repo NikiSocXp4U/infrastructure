@@ -13,7 +13,7 @@
         }
         route /metrics/node {
             rewrite * /metrics
-            reverse_proxy http://node-exporter:9100
+            reverse_proxy http://localhost:9100
         }
         route /metrics/fluent-bit {
             rewrite * /api/v1/metrics/prometheus
