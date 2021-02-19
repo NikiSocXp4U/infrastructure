@@ -5,8 +5,6 @@ services:
     container_name: caddy
     restart: always
     env_file: .env
-    network_mode: host
-
     volumes:
       - ./caddy/:/etc/caddy/
     ports:
