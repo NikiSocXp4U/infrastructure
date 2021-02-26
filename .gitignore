@@ -1,10 +1,17 @@
-# Exclude data directory, but track mods and configs
+# Environment variables
+.env
+
+# Exclude data directory
 data/*
+
+# Track mods
+!data/mods/
 !data/mods/*
+
+# Track configs
 !data/config/*
 
+# Dynmap has a config
 !data/dynmap/
 data/dynmap/*
 !data/dynmap/configuration.txt
-
-.env

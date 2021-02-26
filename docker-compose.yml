@@ -31,8 +31,9 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: FABRIC
-      MOTD: Some Server Dot Jay Peg
+      MOTD: Astral Bijection Isometric Projection
       MEMORY: 6G
+      SPAWN_PROTECTION: 25
 
     env_file: .env
 
