@@ -72,13 +72,12 @@ services:
     restart: unless-stopped
     ports:
       - 9100:9100
-
-  fluent-bit:
-    image: fluent/fluent-bit
-    hostname: fluent-bit
-    container_name: fluent-bit
-    command: "" # disabled
-    volumes:
-      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
-    ports:
-      - 8000:80
+  # fluent-bit:
+  #   image: fluent/fluent-bit
+  #   hostname: fluent-bit
+  #   container_name: fluent-bit
+  #   command: "" # disabled
+  #   volumes:
+  #     - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+  #   ports:
+  #     - 8000:80
