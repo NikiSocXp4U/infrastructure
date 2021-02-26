@@ -9,7 +9,11 @@ data/*
 !data/mods/*
 
 # Track configs
+!data/config/
 !data/config/*
+
+# Ignore Ban Trigger's ore outputs
+data/config/ban-trigger/
 
 # Dynmap has a config
 !data/dynmap/

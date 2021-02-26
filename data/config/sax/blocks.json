@@ -1,0 +1,13 @@
+{
+  "minecraft:coal_ore": "minecraft:stone",
+  "minecraft:spawner": "minecraft:cave_air",
+  "minecraft:mossy_cobblestone": "minecraft:stone",
+  "minecraft:ancient_debris": "minecraft:netherrack",
+  "minecraft:diamond_ore": "minecraft:stone",
+  "minecraft:iron_ore": "minecraft:stone",
+  "minecraft:redstone_ore": "minecraft:stone",
+  "minecraft:lapis_ore": "minecraft:stone",
+  "minecraft:nether_quartz_ore": "minecraft:netherrack",
+  "minecraft:gold_ore": "minecraft:stone",
+  "minecraft:nether_gold_ore": "minecraft:netherrack"
+}

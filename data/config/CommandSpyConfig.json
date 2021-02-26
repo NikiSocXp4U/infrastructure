@@ -1,0 +1,12 @@
+{
+  "main": {
+    "logPlayerCommands": true,
+    "playerMessageStyle": "Player ${playername} (UUID: ${uuid}) used command: ${command}",
+    "logCommandBlockCommands": true,
+    "commandBlockMessageStyle": "Command block in: ${dimension} at X: ${x} Y: ${y} Z: ${z} executed command: ${command}"
+  },
+  "blacklistedCommands": [
+    "msg",
+    "testCommandThatShouldNotBeLogged"
+  ]
+}
