@@ -1,0 +1,21 @@
+# Environment variables
+.env
+
+# Exclude data directory
+data/*
+
+# Track mods
+!data/mods/
+!data/mods/*
+
+# Track configs
+!data/config/
+!data/config/*
+
+# Ignore Ban Trigger's ore outputs
+data/config/ban-trigger/
+
+# Dynmap has a config
+!data/dynmap/
+data/dynmap/*
+!data/dynmap/configuration.txt

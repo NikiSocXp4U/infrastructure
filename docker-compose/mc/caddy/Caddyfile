@@ -1,0 +1,37 @@
+{$SITE_ADDRESS} {
+    # Metrics endpoints
+    route /metrics/* {
+        basicauth {
+            prometheus {$PROMETHEUS_HASHED_PASSWORD}
+        }
+        route /metrics/caddy {
+            metrics
+        }
+        route /metrics/node {
+            rewrite * /metrics
+            reverse_proxy http://localhost:9100
+        }
+        route /metrics/fluent-bit {
+            rewrite * /api/v1/metrics/prometheus
+            reverse_proxy http://localhost:8000
+        }
+        route /metrics/minecraft {
+            rewrite * /metrics
+            reverse_proxy http://localhost:9101
+        }
+    }
+
+    route /fluent-bit/* {
+        basicauth {
+            prometheus {$PROMETHEUS_HASHED_PASSWORD}
+        }
+        uri strip_prefix /fluent-bit
+        reverse_proxy http://localhost:8000
+    }
+
+    # Send everything else to the dynmap
+    reverse_proxy * http://localhost:8123
+
+    # gzip our data for good luck
+    encode zstd gzip
+}

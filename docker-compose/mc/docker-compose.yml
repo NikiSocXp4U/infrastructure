@@ -1,0 +1,83 @@
+version: "3.7"
+services:
+  caddy:
+    image: caddy:alpine
+    container_name: caddy
+    restart: always
+    env_file: .env
+    network_mode: host
+    volumes:
+      - ./caddy/:/etc/caddy/
+    ports:
+      - "80:80"
+      - "443:443"
+
+  minecraft-server:
+    image: itzg/minecraft-server
+    hostname: mc
+    container_name: mc
+
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+
+    volumes:
+      - ./data:/data
+    ports:
+      - 25575:25575
+      - 25565:25565
+      - 8123:8123
+
+    environment:
+      EULA: "TRUE"
+      TYPE: FABRIC
+      MOTD: Astral Bijection Isometric Projection
+      MEMORY: 6G
+      SPAWN_PROTECTION: 25
+
+    env_file: .env
+
+  minecraft-exporter:
+    image: joshi425/minecraft_exporter
+    hostname: mc-exporter
+    container_name: mc-exporter
+
+    command: >
+      sh -c "sleep 10; python minecraft_exporter.py"
+
+    environment:
+      RCON_HOST: mc
+      RCON_PORT: 25575
+      DYNMAP_ENABLED: "True"
+    volumes:
+      - ./data/world:/world
+    env_file: .env
+
+    depends_on:
+      - minecraft-server
+    restart: unless-stopped
+    ports:
+      - 9101:8000
+
+  node-exporter:
+    image: prom/node-exporter:v1.1.0
+    hostname: node-exporter
+    container_name: node-exporter
+    volumes:
+      - /:/rootfs:ro,rslave
+    network_mode: host
+    pid: host
+    command:
+      - "--path.rootfs=/rootfs"
+    restart: unless-stopped
+    ports:
+      - 9100:9100
+  # fluent-bit:
+  #   image: fluent/fluent-bit
+  #   hostname: fluent-bit
+  #   container_name: fluent-bit
+  #   command: "" # disabled
+  #   volumes:
+  #     - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+  #   ports:
+  #     - 8000:80
